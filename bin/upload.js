@@ -15,6 +15,11 @@ const output = input.replace('.mov', '.mp4')
 const ffmpeg = require('fluent-ffmpeg')
 const upload = require('../')
 
+// don't need to convert if we've already got an mp4
+if (input.match(/\.mp4$/)) {
+  return ffmpegReady()
+}
+
 ffmpeg(input)
   .on('progress', (info) => {
     console.log('converting to mp4', info)
